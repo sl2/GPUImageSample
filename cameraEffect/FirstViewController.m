@@ -17,11 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self drawBorder];
+    self.coverImage.image = [self drawBorder:self.coverImage.image];
 }
 
-- (void)drawBorder {
-    UIGraphicsBeginImageContext(self.coverImage.image.size);
+- (UIImage*)drawBorder:(UIImage *)image {
+    UIGraphicsBeginImageContext(image.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.coverImage.image drawAtPoint:CGPointZero];
     CGRect rect = CGRectMake(0, 0, self.coverImage.image.size.width, self.coverImage.image.size.height);
@@ -43,14 +43,14 @@
     CGContextSetRGBFillColor(context, 255, 255, 255, 1);
     CGContextFillRect(context, rect);
     
-    //left
+    //right
     rect = CGRectMake(self.coverImage.image.size.width - borderSize, 0, borderSize, self.coverImage.image.size.height);
     CGContextSetRGBFillColor(context, 255, 255, 255, 1);
     CGContextFillRect(context, rect);
     
-    UIImage *retImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    self.coverImage.image = retImage;
+    return outputImage;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,12 +60,12 @@
 
 - (IBAction)applyEffect1:(id)sender {
     self.coverImage.image = [self sepiaFilter:self.coverImage.image];
-    [self drawBorder];
+    self.coverImage.image = [self drawBorder:self.coverImage.image];
 }
 
 - (IBAction)applyEffect2:(id)sender {
     self.coverImage.image =[self sketchFilter:self.coverImage.image];
-    [self drawBorder];
+    self.coverImage.image = [self drawBorder:self.coverImage.image];
 }
 
 - (UIImage*) sepiaFilter:(UIImage*)image {
