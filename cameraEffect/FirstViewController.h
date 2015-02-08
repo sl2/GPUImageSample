@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GPUImage.h"
 
 @interface FirstViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *coverImage;
+
+- (IBAction)applyEffect1:(id)sender;
+- (IBAction)applyEffect2:(id)sender;
 
 @end
 
