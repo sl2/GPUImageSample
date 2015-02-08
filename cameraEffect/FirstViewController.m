@@ -17,6 +17,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self drawBorder];
+}
+
+- (void)drawBorder {
+    UIGraphicsBeginImageContext(self.coverImage.image.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.coverImage.image drawAtPoint:CGPointZero];
+    CGRect rect = CGRectMake(0, 0, self.coverImage.image.size.width, self.coverImage.image.size.height);
+    
+    CGFloat borderSize = 10.f;
+    
+    //top
+    rect = CGRectMake(0, 0, self.coverImage.image.size.width, borderSize);
+    CGContextSetRGBFillColor(context, 255, 255, 255, 1);
+    CGContextFillRect(context, rect);
+    
+    //bottom
+    rect = CGRectMake(0, self.coverImage.image.size.height - borderSize * 5, self.coverImage.image.size.width, borderSize * 5);
+    CGContextSetRGBFillColor(context, 255, 255, 255, 1);
+    CGContextFillRect(context, rect);
+    
+    //left
+    rect = CGRectMake(0, 0, borderSize, self.coverImage.image.size.height);
+    CGContextSetRGBFillColor(context, 255, 255, 255, 1);
+    CGContextFillRect(context, rect);
+    
+    //left
+    rect = CGRectMake(self.coverImage.image.size.width - borderSize, 0, borderSize, self.coverImage.image.size.height);
+    CGContextSetRGBFillColor(context, 255, 255, 255, 1);
+    CGContextFillRect(context, rect);
+    
+    UIImage *retImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.coverImage.image = retImage;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,10 +60,12 @@
 
 - (IBAction)applyEffect1:(id)sender {
     self.coverImage.image = [self sepiaFilter:self.coverImage.image];
+    [self drawBorder];
 }
 
 - (IBAction)applyEffect2:(id)sender {
     self.coverImage.image =[self sketchFilter:self.coverImage.image];
+    [self drawBorder];
 }
 
 - (UIImage*) sepiaFilter:(UIImage*)image {
@@ -81,5 +117,12 @@
     UIImage *outputImage = [filter imageByFilteringImage:inputImage];
     return outputImage;
 }
+
+
+
+
+
+
+
 
 @end

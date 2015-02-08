@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="333"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="aDq-S1-arB" secondAttribute="centerX" id="HkV-Pl-eSX"/>
                             <constraint firstItem="Rtj-tO-nUK" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="LeS-TA-A0E"/>
